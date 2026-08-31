@@ -4,240 +4,687 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cuaderno de Obra — Tu proyecto. Tu propia app.</title>
-<meta name="description" content="Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar." data-i18n-attr="description" />
+<meta name="description" content="Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-deep: #0A1A2E;
-    --bg-surface: #102540;
-    --bg-surface-2: #1A3352;
-    --accent: #1E4A85;
-    --accent-light: #7FA4D6;
-    --text-primary: #FFFFFF;
-    --text-secondary: #9AA8BC;
-    --border: rgba(255,255,255,0.08);
+    --blueprint: #0D2444;
+    --blueprint-deep: #08152B;
+    --blueprint-mid: #16345E;
+    --line: #C7D9EE;
+    --line-faint: rgba(199, 217, 238, 0.14);
+    --paper: #FBF8F2;
+    --paper-dim: #F1ECE0;
+    --ink: #14181F;
+    --steel: #5B7290;
+    --steel-light: #8CA0BC;
+    --hivis: #F2661C;
+    --hivis-deep: #C94E12;
+    --rule: #DCD5C4;
+    --radius: 3px;
   }
+
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-surface) 60%, var(--bg-surface) 100%);
-    color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 
-  header.nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; gap: 12px; flex-wrap: wrap; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.2px; }
-  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); flex-shrink: 0; }
-  .nav-right { display: flex; align-items: center; gap: 10px; }
-  .lang-switch { display: flex; gap: 4px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
-  .lang-switch button {
-    border: none; background: none; color: var(--text-secondary); font-family: inherit; font-weight: 700; font-size: 0.75rem;
-    padding: 6px 10px; border-radius: 999px; cursor: pointer;
-  }
-  .lang-switch button.active { background: var(--accent); color: #fff; }
-  .nav a.cta-small {
-    background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.85rem;
-    padding: 9px 16px; border-radius: 999px; white-space: nowrap;
-  }
+  body { max-width: 100%; }
 
-  .hero { text-align: center; padding: 56px 0 40px; }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
   .eyebrow {
-    font-size: 0.75rem; letter-spacing: 3px; color: var(--text-secondary); font-weight: 700;
-    text-transform: uppercase; margin-bottom: 14px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
-  h1 {
-    font-size: clamp(2.1rem, 6vw, 3.4rem); font-weight: 800; letter-spacing: -1px; line-height: 1.08;
-    margin: 0 0 18px;
-  }
-  h1 span { color: var(--accent-light); }
-  .subhead {
-    font-size: 1.05rem; color: var(--text-secondary); max-width: 520px; margin: 0 auto 30px; line-height: 1.6;
-  }
-  .cta-primary {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; text-decoration: none;
-    font-weight: 700; font-size: 1rem; padding: 15px 30px; border-radius: 999px;
-    box-shadow: 0 12px 30px rgba(30,74,133,0.45);
-  }
-  .cta-note { margin-top: 12px; font-size: 0.8rem; color: var(--text-secondary); }
 
-  .flow { padding: 34px 0 8px; }
-  .flow-title { text-align: center; font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 20px; }
-  .flow-row {
-    display: flex; gap: 10px; overflow-x: auto; padding: 4px 4px 14px; scrollbar-width: none;
-  }
-  .flow-row::-webkit-scrollbar { display: none; }
-  .flow-step {
-    flex: 0 0 auto; display: flex; align-items: center; gap: 8px; background: var(--bg-surface-2);
-    border: 1px solid var(--border); border-radius: 999px; padding: 9px 16px; font-size: 0.85rem; font-weight: 600;
-    color: var(--text-primary); white-space: nowrap;
-  }
-  .flow-arrow { color: var(--text-secondary); font-size: 0.85rem; flex: 0 0 auto; align-self: center; }
+  a { color: inherit; }
 
-  .features { padding: 56px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .feature-card {
-    background: var(--bg-surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px;
-  }
-  .feature-card .icon {
-    width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 14px;
-  }
-  .feature-card h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 700; }
-  .feature-card p { margin: 0; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; }
+  img, video { max-width: 100%; display: block; }
 
-  .plans { padding: 20px 0 64px; text-align: center; }
-  .plans h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
-  .plans .sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px; }
-  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; text-align: left; }
-  .plan-card {
-    background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(20px, 5vw, 64px);
+    background: var(--blueprint);
+    border-bottom: 1px solid var(--line-faint);
+    position: relative;
+    z-index: 5;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .plan-card.reco { border-color: var(--accent-light); box-shadow: 0 0 0 1px var(--accent-light) inset; }
-  .plan-card .name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-  .plan-card .limits { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; margin-top: 10px; }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-brand .mark {
+    width: 26px; height: 26px;
+    border: 1.5px solid var(--hivis);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    color: var(--hivis);
+    font-size: 1.05rem;
+    line-height: 1;
+    border-radius: 2px;
+  }
+  .nav-right { display: flex; align-items: center; gap: clamp(16px, 3vw, 32px); }
+  .nav-links {
+    display: flex;
+    gap: clamp(16px, 3vw, 32px);
+    font-size: 0.85rem;
+    color: var(--line);
+  }
+  .nav-links a { text-decoration: none; opacity: 0.85; cursor: pointer; }
+  .nav-links a:hover { opacity: 1; color: var(--hivis); }
+  .nav-links a:focus-visible { outline: 2px solid var(--hivis); outline-offset: 3px; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
 
-  footer { border-top: 1px solid var(--border); padding: 30px 0 50px; text-align: center; }
-  footer .foot-cta { margin-bottom: 18px; }
-  footer a.mail { color: var(--accent-light); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-  footer .copy { margin-top: 14px; font-size: 0.75rem; color: var(--text-secondary); }
+  .lang-switch {
+    display: flex;
+    gap: 2px;
+    border: 1px solid var(--line-faint);
+    border-radius: var(--radius);
+    padding: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .lang-switch button {
+    border: none;
+    background: none;
+    color: var(--steel-light);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 5px 9px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .lang-switch button.active { background: var(--hivis); color: #16130E; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background: var(--blueprint);
+    background-image:
+      linear-gradient(var(--line-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px);
+    background-size: 40px 40px;
+    padding: clamp(56px, 10vw, 108px) clamp(20px, 5vw, 64px) clamp(64px, 8vw, 96px);
+    color: #fff;
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: '';
+    position: absolute;
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--steel-light);
+    opacity: 0.55;
+  }
+  .hero::before { top: 28px; left: 24px; border-right: none; border-bottom: none; }
+  .hero::after { bottom: 28px; right: 24px; border-left: none; border-top: none; }
+  @media (max-width: 640px) { .hero::before, .hero::after { display: none; } }
+
+  .hero-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero .eyebrow { color: var(--hivis); margin-bottom: 22px; display: block; }
+  .hero h1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: 0.96;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .hero h1 .line2 { color: var(--line); }
+  .hero p.sub {
+    margin-top: 26px;
+    max-width: 42ch;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--line);
+  }
+
+  .cta-row {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+  }
+  .btn-hivis {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--hivis);
+    color: #16130E;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 15px 26px;
+    border-radius: var(--radius);
+    border: 1px solid var(--hivis-deep);
+    box-shadow: 3px 3px 0 var(--hivis-deep);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    cursor: pointer;
+  }
+  .btn-hivis:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hivis-deep); }
+  .btn-hivis:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--hivis-deep); }
+  .btn-hivis:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .btn-hivis svg { flex-shrink: 0; }
+
+  .trust-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--steel-light);
+    letter-spacing: 0.03em;
+  }
+
+  .store-badges {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .store-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid var(--line-faint);
+    border-radius: var(--radius);
+    color: var(--line);
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    opacity: 0.7;
+  }
+
+  /* ---------- Video / spec-sheet panel ---------- */
+  .spec-panel {
+    background: var(--paper);
+    padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 64px);
+  }
+  .spec-frame {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: clamp(10px, 2vw, 18px);
+  }
+  .spec-frame::before, .spec-frame::after,
+  .spec-corner-tl, .spec-corner-br {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    border-color: var(--blueprint);
+    border-style: solid;
+  }
+  .spec-frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .spec-frame::after { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+  .spec-corner-tl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+  .spec-corner-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+  .video-slot {
+    aspect-ratio: 16 / 9;
+    background: var(--blueprint-deep);
+    background-image: linear-gradient(var(--line-faint) 1px, transparent 1px), linear-gradient(90deg, var(--line-faint) 1px, transparent 1px);
+    background-size: 32px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--line);
+  }
+  .video-placeholder { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 20px; }
+  .play-ring {
+    width: 62px; height: 62px;
+    border: 1.5px solid var(--hivis);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-placeholder .eyebrow { color: var(--steel-light); }
+  .video-placeholder .cap { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--steel-light); max-width: 34ch; }
+
+  .spec-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .spec-strip .step {
+    flex: 1 1 auto;
+    min-width: 84px;
+    padding: 12px 10px 4px;
+    border-right: 1px solid var(--rule);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--steel);
+    text-align: center;
+    position: relative;
+  }
+  .spec-strip .step:last-child { border-right: none; }
+  .spec-strip .step .n { display: block; color: var(--hivis-deep); font-weight: 600; margin-bottom: 3px; }
+  @media (max-width: 700px) {
+    .spec-strip { display: none; }
+  }
+  .spec-strip-mobile { display: none; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--steel); text-align: center; }
+  @media (max-width: 700px) { .spec-strip-mobile { display: block; } }
+
+  /* ---------- Punch list (antes / despues) ---------- */
+  .punchlist {
+    background: var(--blueprint);
+    padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 64px);
+    color: #fff;
+  }
+  .punchlist-head { max-width: 640px; margin: 0 auto 44px; text-align: left; }
+  .punchlist-head .eyebrow { color: var(--hivis); margin-bottom: 14px; display: block; }
+  .punchlist-head h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .punch-grid {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line-faint);
+    border: 1px solid var(--line-faint);
+  }
+  @media (max-width: 720px) { .punch-grid { grid-template-columns: 1fr; } }
+  .punch-col { background: var(--blueprint-deep); padding: 28px clamp(20px, 3vw, 34px) 34px; }
+  .punch-col h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .punch-col.before h3 { color: var(--steel-light); }
+  .punch-col.after h3 { color: var(--hivis); }
+  .punch-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .punch-col li { display: flex; gap: 10px; font-size: 0.95rem; line-height: 1.5; color: var(--line); }
+  .punch-col.before li::before { content: '✕'; color: var(--steel-light); flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+  .punch-col.after li::before { content: '✓'; color: var(--hivis); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+  /* ---------- Legend / modules ---------- */
+  .legend {
+    background: var(--paper);
+    padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 64px);
+  }
+  .legend-head { max-width: 640px; margin: 0 auto 40px; }
+  .legend-head .eyebrow { color: var(--hivis-deep); margin-bottom: 14px; display: block; }
+  .legend-head h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    text-transform: uppercase;
+    color: var(--blueprint);
+    line-height: 1.05;
+  }
+  .legend-grid {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .legend-item {
+    background: var(--paper);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .legend-item .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--hivis-deep);
+  }
+  .legend-item h4 { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+  .legend-item p { margin: 0; font-size: 0.88rem; color: var(--steel); line-height: 1.5; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta {
+    background: var(--blueprint-deep);
+    color: #fff;
+    padding: clamp(56px, 9vw, 96px) clamp(20px, 5vw, 64px);
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    text-transform: uppercase;
+    line-height: 1.02;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .final-cta .cta-row { justify-content: center; margin-top: 30px; }
+  .final-cta .trust-note { width: 100%; text-align: center; margin-top: 4px; }
+
+  footer {
+    background: var(--blueprint-deep);
+    border-top: 1px solid var(--line-faint);
+    padding: 26px clamp(20px, 5vw, 64px) 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--steel-light);
+  }
+  footer .foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--hivis); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn-hivis, .store-badge { transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease, border-color 0.12s ease; }
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="nav">
-      <div class="brand"><span class="brand-mark"></span> <span data-i18n="brand">Cuaderno de Obra</span></div>
-      <div class="nav-right">
-        <div class="lang-switch" role="group" aria-label="Idioma">
-          <button type="button" data-lang="es">ES</button>
-          <button type="button" data-lang="en">EN</button>
-          <button type="button" data-lang="pt">PT</button>
-        </div>
-        <a class="cta-small" data-mailcta href="#" data-i18n="navCta">Empezar gratis</a>
-      </div>
-    </header>
 
-    <section class="hero">
-      <div class="eyebrow" data-i18n="eyebrow">Gestión de obra, simple</div>
-      <h1 data-i18n-html="h1">Tu proyecto.<br><span>Tu propia app.</span></h1>
-      <p class="subhead" data-i18n="subhead">Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.</p>
-      <a class="cta-primary" data-mailcta href="#" data-i18n="heroCta">Crear mi primera obra gratis →</a>
-      <div class="cta-note" data-i18n="ctaNote">Sin tarjeta. 30 días gratis.</div>
-    </section>
-
-    <section class="flow">
-      <div class="flow-title" data-i18n="flowTitle">De la primera obra al cierre</div>
-      <div class="flow-row" data-flow></div>
-    </section>
-
-    <section class="features" data-features></section>
-
-    <section class="plans">
-      <h2 data-i18n="plansTitle">Un plan para cada escala</h2>
-      <div class="sub" data-i18n="plansSub">Las mismas funciones en los tres — cambia cuántas obras, cuánto almacenamiento y cuántos miembros.</div>
-      <div class="plan-grid" data-plans></div>
-    </section>
-
-    <footer>
-      <div class="foot-cta">
-        <a class="cta-primary" data-mailcta href="#" data-i18n="heroCta">Crear mi primera obra gratis →</a>
-      </div>
-      <a class="mail" href="mailto:info@diegopetrate.com">info@diegopetrate.com</a>
-      <div class="copy">© 2026 Cuaderno de Obra</div>
-    </footer>
+<nav>
+  <div class="nav-brand">
+    <span class="mark">A</span>
+    <span data-i18n="brand">CUADERNO&nbsp;DE&nbsp;OBRA</span>
   </div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#como-funciona" data-i18n="navComo">Cómo funciona</a>
+      <a href="#modulos" data-i18n="navQue">Qué incluye</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow" data-i18n="heroEyebrow">Bitácora de obra · digital</span>
+    <h1><span data-i18n="h1Line1">TU PROYECTO.</span><br><span class="line2" data-i18n="h1Line2">TU PROPIA APP.</span></h1>
+    <p class="sub" data-i18n="sub">Gestioná tu proyecto. Compartí información con tu cliente. Coordiná a tu equipo. Todo en un solo lugar.</p>
+    <div class="cta-row">
+      <a class="btn-hivis" data-mailcta href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span data-i18n="ctaHero">Crear mi primera obra gratis</span>
+      </a>
+    </div>
+    <div class="trust-note" data-i18n="trustNote">SIN&nbsp;TARJETA&nbsp;·&nbsp;30&nbsp;DÍAS&nbsp;GRATIS</div>
+    <div class="store-badges">
+      <span class="store-badge" data-i18n="badgeAndroid">▸ Android — en prueba cerrada</span>
+      <span class="store-badge" data-i18n="badgeIos">▸ iOS — en revisión</span>
+    </div>
+  </div>
+</header>
+
+<section class="spec-panel" id="como-funciona">
+  <div class="spec-frame">
+    <div class="spec-corner-tl"></div>
+    <div class="spec-corner-br"></div>
+    <div class="video-slot">
+      <!--
+        Reemplazar por el video real de 30s, sin voz en off, mostrando:
+        Crear obra -> dashboard -> cronograma -> fotos -> documentos -> cliente -> avance -> cierre.
+        <video autoplay muted loop playsinline poster="RUTA_POSTER.jpg">
+          <source src="RUTA_DEL_VIDEO.mp4" type="video/mp4">
+        </video>
+      -->
+      <div class="video-placeholder">
+        <div class="play-ring">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--hivis)"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="eyebrow" data-i18n="videoEyebrow">00:30 · sin voz en off</span>
+        <span class="cap" data-i18n="videoCap">Recorrido: crear obra → dashboard → cronograma → fotos → documentos → cliente → avance → cierre</span>
+      </div>
+    </div>
+    <div class="spec-strip" data-strip></div>
+    <div class="spec-strip-mobile" data-strip-mobile></div>
+  </div>
+</section>
+
+<section class="punchlist">
+  <div class="punchlist-head">
+    <span class="eyebrow" data-i18n="punchEyebrow">Parte de obra · hoy</span>
+    <h2 data-i18n-html="punchH2">Dejá de armar el<br>informe a las 11 de la noche</h2>
+  </div>
+  <div class="punch-grid">
+    <div class="punch-col before">
+      <h3 data-i18n="punchBeforeTitle">Sin Cuaderno de Obra</h3>
+      <ul data-punch-before></ul>
+    </div>
+    <div class="punch-col after">
+      <h3 data-i18n="punchAfterTitle">Con Cuaderno de Obra</h3>
+      <ul data-punch-after></ul>
+    </div>
+  </div>
+</section>
+
+<section class="legend" id="modulos">
+  <div class="legend-head">
+    <span class="eyebrow" data-i18n="legendEyebrow">Leyenda</span>
+    <h2 data-i18n-html="legendH2">Un cuaderno, todas<br>las pestañas de la obra</h2>
+  </div>
+  <div class="legend-grid" data-legend></div>
+</section>
+
+<section class="final-cta">
+  <h2 data-i18n="finalH2">Tu próxima obra empieza con un cuaderno en blanco</h2>
+  <div class="cta-row">
+    <a class="btn-hivis" data-mailcta href="#">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span data-i18n="ctaHero">Crear mi primera obra gratis</span>
+    </a>
+  </div>
+  <div class="trust-note" data-i18n="trustNote">SIN&nbsp;TARJETA&nbsp;·&nbsp;30&nbsp;DÍAS&nbsp;GRATIS</div>
+</section>
+
+<footer>
+  <span data-i18n="footCopy">© 2026 Cuaderno de Obra — Architectures.DiegoPetrate</span>
+  <div class="foot-links">
+    <a href="mailto:info@diegopetrate.com" data-i18n="footContact">Contacto</a>
+  </div>
+</footer>
 
 <script>
 (function () {
   var DICT = {
     es: {
-      brand: 'Cuaderno de Obra',
       title: 'Cuaderno de Obra — Tu proyecto. Tu propia app.',
       description: 'Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.',
-      navCta: 'Empezar gratis',
-      eyebrow: 'Gestión de obra, simple',
-      h1: 'Tu proyecto.<br><span>Tu propia app.</span>',
-      subhead: 'Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.',
-      heroCta: 'Crear mi primera obra gratis →',
-      ctaNote: 'Sin tarjeta. 30 días gratis.',
-      flowTitle: 'De la primera obra al cierre',
-      flow: ['Crear obra', 'Dashboard', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Avance', 'Cierre'],
-      features: [
-        ['📷', 'Fotos y videos de obra', 'Registrá el avance con fotos y videos geoetiquetados, organizados por fecha y accesibles para todo el equipo.'],
-        ['🎥', 'Cámaras y drones', 'Conectá cámaras IP o drones con stream propio y mirá tu obra en vivo desde la app, capturando referencias cuando las necesitás.'],
-        ['💰', 'Contabilidad', 'Cargá gastos e ingresos por categoría, en varias monedas, y llevá el balance de la obra sin depender de una planilla aparte.'],
-        ['📁', 'Documentos', 'Planos, contratos, pólizas y permisos, ordenados por categoría y disponibles para consultar desde cualquier lugar.'],
-        ['👥', 'Equipo y clientes', 'Invitá a subcontratistas, arquitectos y al cliente con un simple código — cada uno ve exactamente lo que necesita.'],
-        ['🗓️', 'Cronograma y tareas', 'Planificá etapas, asigná tareas y llevá el pulso de la obra día a día, desde el celular.'],
+      brand: 'CUADERNO DE OBRA',
+      navComo: 'Cómo funciona',
+      navQue: 'Qué incluye',
+      heroEyebrow: 'Bitácora de obra · digital',
+      h1Line1: 'TU PROYECTO.',
+      h1Line2: 'TU PROPIA APP.',
+      sub: 'Gestioná tu proyecto. Compartí información con tu cliente. Coordiná a tu equipo. Todo en un solo lugar.',
+      ctaHero: 'Crear mi primera obra gratis',
+      trustNote: 'SIN TARJETA · 30 DÍAS GRATIS',
+      badgeAndroid: '▸ Android — en prueba cerrada',
+      badgeIos: '▸ iOS — en revisión',
+      videoEyebrow: '00:30 · sin voz en off',
+      videoCap: 'Recorrido: crear obra → dashboard → cronograma → fotos → documentos → cliente → avance → cierre',
+      steps: ['Crear obra', 'Dashboard', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Avance', 'Cierre'],
+      punchEyebrow: 'Parte de obra · hoy',
+      punchH2: 'Dejá de armar el<br>informe a las 11 de la noche',
+      punchBeforeTitle: 'Sin Cuaderno de Obra',
+      punchBefore: [
+        'Fotos del avance perdidas en el chat de WhatsApp',
+        'Presupuesto en una planilla que nadie más abre',
+        'El cliente pregunta "¿cómo va todo?" y no tenés nada para mandarle',
+        'Los comprobantes de gastos, en fotos sueltas de la cámara',
+        'Cambios de obra acordados de palabra, sin registro',
       ],
-      plansTitle: 'Un plan para cada escala',
-      plansSub: 'Las mismas funciones en los tres — cambia cuántas obras, cuánto almacenamiento y cuántos miembros.',
-      plans: [
-        ['Individual', ['1 obra activa', '2 GB de almacenamiento', 'Hasta 5 miembros'], false],
-        ['Profesional', ['3 obras activas', '10 GB de almacenamiento', 'Hasta 10 miembros'], true],
-        ['Estudio', ['Obras ilimitadas', '50 GB de almacenamiento', 'Miembros ilimitados'], false],
+      punchAfterTitle: 'Con Cuaderno de Obra',
+      punchAfter: [
+        'Fotos con fecha, zona y ubicación, ordenadas por día de obra',
+        'Contabilidad y flujo de caja actualizados en tiempo real',
+        'Tu cliente ve el avance solo, cuando quiere, desde su celular',
+        'Comprobantes escaneados y sumados a la obra al instante',
+        'Órdenes de cambio con firma digital, con fecha y valor',
       ],
+      legendEyebrow: 'Leyenda',
+      legendH2: 'Un cuaderno, todas<br>las pestañas de la obra',
+      legend: [
+        ['01 — CRONOGRAMA', 'Calendario', 'Etapas, tareas y días de obra transcurridos vs. planificados, siempre a la vista.'],
+        ['02 — REGISTRO VISUAL', 'Fotos de obra', 'Bitácora fotográfica geoetiquetada, con comparador de antes/después.'],
+        ['03 — ARCHIVO', 'Documentos', 'Planos, contratos y permisos, en un solo lugar accesible para todo el equipo.'],
+        ['04 — FINANZAS', 'Contabilidad', 'Presupuesto, gastos por categoría y flujo de caja, sin planillas paralelas.'],
+        ['05 — COMPROBANTES', 'Gastos', 'Cada comprobante fotografiado y sumado a la obra correspondiente.'],
+        ['06 — ACUERDOS', 'Órdenes de cambio', 'Cambios de alcance con firma digital: fecha, valor y responsable, siempre a mano.'],
+        ['07 — EQUIPO', 'Usuarios y roles', 'Sumá arquitecto, contratista y cliente, cada uno con su nivel de acceso.'],
+        ['08 — SÍNTESIS', 'Reportes', 'Informes de avance en PDF, listos para mandar al cliente en un toque.'],
+      ],
+      finalH2: 'Tu próxima obra empieza con un cuaderno en blanco',
+      footCopy: '© 2026 Cuaderno de Obra — Architectures.DiegoPetrate',
+      footContact: 'Contacto',
       mailSubject: 'Quiero probar Cuaderno de Obra',
     },
     en: {
-      brand: 'Cuaderno de Obra',
       title: 'Cuaderno de Obra — Your project. Your own app.',
       description: 'Manage your project, share information with your client, and coordinate your team. All in one place.',
-      navCta: 'Start for free',
-      eyebrow: 'Project management, simple',
-      h1: 'Your project.<br><span>Your own app.</span>',
-      subhead: 'Manage your project, share information with your client, and coordinate your team. All in one place.',
-      heroCta: 'Create my first project free →',
-      ctaNote: 'No card required. 30 days free.',
-      flowTitle: 'From the first project to closeout',
-      flow: ['Create project', 'Dashboard', 'Schedule', 'Photos', 'Documents', 'Client', 'Progress', 'Closeout'],
-      features: [
-        ['📷', 'Photos and videos', 'Log progress with geotagged photos and videos, organized by date and available to your whole team.'],
-        ['🎥', 'Cameras and drones', 'Connect IP cameras or drones with their own stream and watch your site live from the app, capturing stills whenever you need them.'],
-        ['💰', 'Accounting', 'Log expenses and income by category, in multiple currencies, and track the project balance without a separate spreadsheet.'],
-        ['📁', 'Documents', 'Plans, contracts, insurance policies and permits, sorted by category and available from anywhere.'],
-        ['👥', 'Team and clients', 'Invite subcontractors, architects, and the client with a simple code — everyone sees exactly what they need.'],
-        ['🗓️', 'Schedule and tasks', 'Plan phases, assign tasks, and keep a daily pulse on the project, from your phone.'],
+      brand: 'CUADERNO DE OBRA',
+      navComo: 'How it works',
+      navQue: "What's included",
+      heroEyebrow: 'Digital site logbook',
+      h1Line1: 'YOUR PROJECT.',
+      h1Line2: 'YOUR OWN APP.',
+      sub: 'Manage your project. Share information with your client. Coordinate your team. All in one place.',
+      ctaHero: 'Create my first project free',
+      trustNote: 'NO CARD · 30 DAYS FREE',
+      badgeAndroid: '▸ Android — closed testing',
+      badgeIos: '▸ iOS — in review',
+      videoEyebrow: '00:30 · no voiceover',
+      videoCap: 'Walkthrough: create project → dashboard → schedule → photos → documents → client → progress → closeout',
+      steps: ['Create project', 'Dashboard', 'Schedule', 'Photos', 'Documents', 'Client', 'Progress', 'Closeout'],
+      punchEyebrow: 'Site report · today',
+      punchH2: 'Stop writing the<br>report at 11pm',
+      punchBeforeTitle: 'Without Cuaderno de Obra',
+      punchBefore: [
+        'Progress photos lost in the WhatsApp chat',
+        'Budget in a spreadsheet nobody else opens',
+        'The client asks "how\'s it going?" and you have nothing to send',
+        'Expense receipts, in loose photos on your camera roll',
+        'Scope changes agreed verbally, with no record',
       ],
-      plansTitle: 'A plan for every scale',
-      plansSub: 'Same features on all three — what changes is how many projects, how much storage, and how many members.',
-      plans: [
-        ['Individual', ['1 active project', '2 GB of storage', 'Up to 5 members'], false],
-        ['Professional', ['3 active projects', '10 GB of storage', 'Up to 10 members'], true],
-        ['Studio', ['Unlimited projects', '50 GB of storage', 'Unlimited members'], false],
+      punchAfterTitle: 'With Cuaderno de Obra',
+      punchAfter: [
+        'Photos with date, zone and location, sorted by site day',
+        'Accounting and cash flow updated in real time',
+        'Your client checks progress on their own, from their phone',
+        'Receipts scanned and added to the project instantly',
+        'Change orders with digital signature, date and value',
       ],
+      legendEyebrow: 'Legend',
+      legendH2: 'One logbook, every<br>tab of the project',
+      legend: [
+        ['01 — SCHEDULE', 'Calendar', 'Phases, tasks and days elapsed vs. planned, always in view.'],
+        ['02 — VISUAL LOG', 'Site photos', 'Geotagged photo log, with a before/after comparator.'],
+        ['03 — ARCHIVE', 'Documents', 'Plans, contracts and permits, in one place available to the whole team.'],
+        ['04 — FINANCE', 'Accounting', 'Budget, expenses by category and cash flow, no parallel spreadsheets.'],
+        ['05 — RECEIPTS', 'Expenses', 'Every receipt photographed and added to its project.'],
+        ['06 — AGREEMENTS', 'Change orders', 'Scope changes with digital signature: date, value and owner, always at hand.'],
+        ['07 — TEAM', 'Users and roles', 'Add architect, contractor and client, each with their own access level.'],
+        ['08 — SUMMARY', 'Reports', 'Progress reports in PDF, ready to send the client in one tap.'],
+      ],
+      finalH2: 'Your next project starts with a blank logbook',
+      footCopy: '© 2026 Cuaderno de Obra — Architectures.DiegoPetrate',
+      footContact: 'Contact',
       mailSubject: 'I want to try Cuaderno de Obra',
     },
     pt: {
-      brand: 'Cuaderno de Obra',
-      title: 'Cuaderno de Obra — Sua obra. Seu próprio app.',
+      title: 'Cuaderno de Obra — Seu projeto. Seu próprio app.',
       description: 'Gerencie sua obra, compartilhe informações com seu cliente e coordene sua equipe. Tudo em um só lugar.',
-      navCta: 'Começar grátis',
-      eyebrow: 'Gestão de obra, simples',
-      h1: 'Sua obra.<br><span>Seu próprio app.</span>',
-      subhead: 'Gerencie sua obra, compartilhe informações com seu cliente e coordene sua equipe. Tudo em um só lugar.',
-      heroCta: 'Criar minha primeira obra grátis →',
-      ctaNote: 'Sem cartão. 30 dias grátis.',
-      flowTitle: 'Da primeira obra ao encerramento',
-      flow: ['Criar obra', 'Painel', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Andamento', 'Encerramento'],
-      features: [
-        ['📷', 'Fotos e vídeos da obra', 'Registre o andamento com fotos e vídeos geolocalizados, organizados por data e acessíveis para toda a equipe.'],
-        ['🎥', 'Câmeras e drones', 'Conecte câmeras IP ou drones com stream próprio e acompanhe sua obra ao vivo pelo app, capturando imagens quando precisar.'],
-        ['💰', 'Contabilidade', 'Registre despesas e receitas por categoria, em várias moedas, e acompanhe o saldo da obra sem depender de uma planilha à parte.'],
-        ['📁', 'Documentos', 'Plantas, contratos, apólices e licenças, organizados por categoria e disponíveis de qualquer lugar.'],
-        ['👥', 'Equipe e clientes', 'Convide subempreiteiros, arquitetos e o cliente com um código simples — cada um vê exatamente o que precisa.'],
-        ['🗓️', 'Cronograma e tarefas', 'Planeje etapas, atribua tarefas e acompanhe o ritmo da obra dia a dia, pelo celular.'],
+      brand: 'CUADERNO DE OBRA',
+      navComo: 'Como funciona',
+      navQue: 'O que inclui',
+      heroEyebrow: 'Diário de obra · digital',
+      h1Line1: 'SEU PROJETO.',
+      h1Line2: 'SEU PRÓPRIO APP.',
+      sub: 'Gerencie sua obra. Compartilhe informações com seu cliente. Coordene sua equipe. Tudo em um só lugar.',
+      ctaHero: 'Criar minha primeira obra grátis',
+      trustNote: 'SEM CARTÃO · 30 DIAS GRÁTIS',
+      badgeAndroid: '▸ Android — teste fechado',
+      badgeIos: '▸ iOS — em revisão',
+      videoEyebrow: '00:30 · sem locução',
+      videoCap: 'Roteiro: criar obra → painel → cronograma → fotos → documentos → cliente → andamento → encerramento',
+      steps: ['Criar obra', 'Painel', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Andamento', 'Encerramento'],
+      punchEyebrow: 'Diário de obra · hoje',
+      punchH2: 'Pare de montar o<br>relatório às 23h',
+      punchBeforeTitle: 'Sem o Cuaderno de Obra',
+      punchBefore: [
+        'Fotos do andamento perdidas no chat do WhatsApp',
+        'Orçamento em uma planilha que mais ninguém abre',
+        'O cliente pergunta "como está indo?" e você não tem nada para mandar',
+        'Comprovantes de despesas, em fotos soltas da câmera',
+        'Mudanças de obra combinadas de boca, sem registro',
       ],
-      plansTitle: 'Um plano para cada escala',
-      plansSub: 'As mesmas funções nos três — o que muda é quantas obras, quanto armazenamento e quantos membros.',
-      plans: [
-        ['Individual', ['1 obra ativa', '2 GB de armazenamento', 'Até 5 membros'], false],
-        ['Profissional', ['3 obras ativas', '10 GB de armazenamento', 'Até 10 membros'], true],
-        ['Estúdio', ['Obras ilimitadas', '50 GB de armazenamento', 'Membros ilimitados'], false],
+      punchAfterTitle: 'Com o Cuaderno de Obra',
+      punchAfter: [
+        'Fotos com data, zona e localização, organizadas por dia de obra',
+        'Contabilidade e fluxo de caixa atualizados em tempo real',
+        'Seu cliente acompanha o andamento sozinho, quando quiser, pelo celular',
+        'Comprovantes escaneados e somados à obra na hora',
+        'Ordens de mudança com assinatura digital, data e valor',
       ],
+      legendEyebrow: 'Legenda',
+      legendH2: 'Um diário, todas<br>as abas da obra',
+      legend: [
+        ['01 — CRONOGRAMA', 'Calendário', 'Etapas, tarefas e dias de obra decorridos vs. planejados, sempre à vista.'],
+        ['02 — REGISTRO VISUAL', 'Fotos da obra', 'Diário fotográfico geolocalizado, com comparador de antes/depois.'],
+        ['03 — ARQUIVO', 'Documentos', 'Plantas, contratos e licenças, em um só lugar acessível para toda a equipe.'],
+        ['04 — FINANÇAS', 'Contabilidade', 'Orçamento, despesas por categoria e fluxo de caixa, sem planilhas paralelas.'],
+        ['05 — COMPROVANTES', 'Despesas', 'Cada comprovante fotografado e somado à obra correspondente.'],
+        ['06 — ACORDOS', 'Ordens de mudança', 'Mudanças de escopo com assinatura digital: data, valor e responsável, sempre à mão.'],
+        ['07 — EQUIPE', 'Usuários e papéis', 'Adicione arquiteto, empreiteiro e cliente, cada um com seu nível de acesso.'],
+        ['08 — SÍNTESE', 'Relatórios', 'Relatórios de andamento em PDF, prontos para enviar ao cliente em um toque.'],
+      ],
+      finalH2: 'Sua próxima obra começa com um diário em branco',
+      footCopy: '© 2026 Cuaderno de Obra — Architectures.DiegoPetrate',
+      footContact: 'Contato',
       mailSubject: 'Quero experimentar o Cuaderno de Obra',
     },
   };
@@ -255,55 +702,57 @@
     return 'es';
   }
 
-  function renderFlow(container, steps) {
-    container.innerHTML = '';
-    steps.forEach(function (step, i) {
-      if (i > 0) {
-        var arrow = document.createElement('span');
-        arrow.className = 'flow-arrow';
-        arrow.textContent = '→';
-        container.appendChild(arrow);
-      }
-      var chip = document.createElement('span');
-      chip.className = 'flow-step';
-      chip.textContent = step;
-      container.appendChild(chip);
+  function renderSteps(d) {
+    var strip = document.querySelector('[data-strip]');
+    var mobile = document.querySelector('[data-strip-mobile]');
+    strip.innerHTML = '';
+    d.steps.forEach(function (label, i) {
+      var step = document.createElement('div');
+      step.className = 'step';
+      var n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = String(i + 1).padStart(2, '0');
+      step.appendChild(n);
+      step.appendChild(document.createTextNode(label));
+      strip.appendChild(step);
+    });
+    mobile.textContent = d.steps.join(' → ');
+  }
+
+  function renderPunch(d) {
+    var before = document.querySelector('[data-punch-before]');
+    var after = document.querySelector('[data-punch-after]');
+    before.innerHTML = '';
+    after.innerHTML = '';
+    d.punchBefore.forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      before.appendChild(li);
+    });
+    d.punchAfter.forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      after.appendChild(li);
     });
   }
 
-  function renderFeatures(container, features) {
-    container.innerHTML = '';
-    features.forEach(function (f) {
+  function renderLegend(d) {
+    var grid = document.querySelector('[data-legend]');
+    grid.innerHTML = '';
+    d.legend.forEach(function (item) {
       var card = document.createElement('div');
-      card.className = 'feature-card';
-      var icon = document.createElement('div');
-      icon.className = 'icon';
-      icon.textContent = f[0];
-      var h3 = document.createElement('h3');
-      h3.textContent = f[1];
+      card.className = 'legend-item';
+      var tag = document.createElement('span');
+      tag.className = 'tag';
+      tag.textContent = item[0];
+      var h4 = document.createElement('h4');
+      h4.textContent = item[1];
       var p = document.createElement('p');
-      p.textContent = f[2];
-      card.appendChild(icon);
-      card.appendChild(h3);
+      p.textContent = item[2];
+      card.appendChild(tag);
+      card.appendChild(h4);
       card.appendChild(p);
-      container.appendChild(card);
-    });
-  }
-
-  function renderPlans(container, plans) {
-    container.innerHTML = '';
-    plans.forEach(function (p) {
-      var card = document.createElement('div');
-      card.className = 'plan-card' + (p[2] ? ' reco' : '');
-      var name = document.createElement('div');
-      name.className = 'name';
-      name.textContent = p[0];
-      var limits = document.createElement('div');
-      limits.className = 'limits';
-      limits.innerHTML = p[1].join('<br>');
-      card.appendChild(name);
-      card.appendChild(limits);
-      container.appendChild(card);
+      grid.appendChild(card);
     });
   }
 
@@ -326,9 +775,9 @@
     var mailHref = 'mailto:info@diegopetrate.com?subject=' + encodeURIComponent(d.mailSubject);
     document.querySelectorAll('[data-mailcta]').forEach(function (a) { a.setAttribute('href', mailHref); });
 
-    renderFlow(document.querySelector('[data-flow]'), d.flow);
-    renderFeatures(document.querySelector('[data-features]'), d.features);
-    renderPlans(document.querySelector('[data-plans]'), d.plans);
+    renderSteps(d);
+    renderPunch(d);
+    renderLegend(d);
 
     document.querySelectorAll('.lang-switch button').forEach(function (btn) {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
