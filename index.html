@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cuaderno de Obra — Tu obra. Tu propia app.</title>
-<meta name="description" content="Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar." />
+<meta name="description" content="Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar." data-i18n-attr="description" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,8 +18,6 @@
     --text-primary: #FFFFFF;
     --text-secondary: #9AA8BC;
     --border: rgba(255,255,255,0.08);
-    --card: #FBF8F2;
-    --ink: #14181F;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -32,9 +30,16 @@
   }
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 
-  header.nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  header.nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; gap: 12px; flex-wrap: wrap; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.2px; }
   .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); flex-shrink: 0; }
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .lang-switch { display: flex; gap: 4px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+  .lang-switch button {
+    border: none; background: none; color: var(--text-secondary); font-family: inherit; font-weight: 700; font-size: 0.75rem;
+    padding: 6px 10px; border-radius: 999px; cursor: pointer;
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
   .nav a.cta-small {
     background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.85rem;
     padding: 9px 16px; border-radius: 999px; white-space: nowrap;
@@ -104,98 +109,240 @@
 <body>
   <div class="wrap">
     <header class="nav">
-      <div class="brand"><span class="brand-mark"></span> Cuaderno de Obra</div>
-      <a class="cta-small" href="mailto:info@diegopetrate.com?subject=Quiero%20probar%20Cuaderno%20de%20Obra">Empezar gratis</a>
+      <div class="brand"><span class="brand-mark"></span> <span data-i18n="brand">Cuaderno de Obra</span></div>
+      <div class="nav-right">
+        <div class="lang-switch" role="group" aria-label="Idioma">
+          <button type="button" data-lang="es">ES</button>
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
+        <a class="cta-small" data-mailcta href="#" data-i18n="navCta">Empezar gratis</a>
+      </div>
     </header>
 
     <section class="hero">
-      <div class="eyebrow">Gestión de obra, simple</div>
-      <h1>Tu obra.<br><span>Tu propia app.</span></h1>
-      <p class="subhead">Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.</p>
-      <a class="cta-primary" href="mailto:info@diegopetrate.com?subject=Quiero%20probar%20Cuaderno%20de%20Obra">Crear mi primera obra gratis →</a>
-      <div class="cta-note">Sin tarjeta. 30 días gratis.</div>
+      <div class="eyebrow" data-i18n="eyebrow">Gestión de obra, simple</div>
+      <h1 data-i18n-html="h1">Tu obra.<br><span>Tu propia app.</span></h1>
+      <p class="subhead" data-i18n="subhead">Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.</p>
+      <a class="cta-primary" data-mailcta href="#" data-i18n="heroCta">Crear mi primera obra gratis →</a>
+      <div class="cta-note" data-i18n="ctaNote">Sin tarjeta. 30 días gratis.</div>
     </section>
 
     <section class="flow">
-      <div class="flow-title">De la primera obra al cierre</div>
-      <div class="flow-row">
-        <span class="flow-step">🏗️ Crear obra</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">📊 Dashboard</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">🗓️ Cronograma</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">📷 Fotos</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">📁 Documentos</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">🤝 Cliente</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">📈 Avance</span>
-        <span class="flow-arrow">→</span>
-        <span class="flow-step">✅ Cierre</span>
-      </div>
+      <div class="flow-title" data-i18n="flowTitle">De la primera obra al cierre</div>
+      <div class="flow-row" data-flow></div>
     </section>
 
-    <section class="features">
-      <div class="feature-card">
-        <div class="icon">📷</div>
-        <h3>Fotos y videos de obra</h3>
-        <p>Registrá el avance con fotos y videos geoetiquetados, organizados por fecha y accesibles para todo el equipo.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🎥</div>
-        <h3>Cámaras y drones</h3>
-        <p>Conectá cámaras IP o drones con stream propio y mirá tu obra en vivo desde la app, capturando referencias cuando las necesitás.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">💰</div>
-        <h3>Contabilidad</h3>
-        <p>Cargá gastos e ingresos por categoría, en varias monedas, y llevá el balance de la obra sin depender de una planilla aparte.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">📁</div>
-        <h3>Documentos</h3>
-        <p>Planos, contratos, pólizas y permisos, ordenados por categoría y disponibles para consultar desde cualquier lugar.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">👥</div>
-        <h3>Equipo y clientes</h3>
-        <p>Invitá a subcontratistas, arquitectos y al cliente con un simple código — cada uno ve exactamente lo que necesita.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🗓️</div>
-        <h3>Cronograma y tareas</h3>
-        <p>Planificá etapas, asigná tareas y llevá el pulso de la obra día a día, desde el celular.</p>
-      </div>
-    </section>
+    <section class="features" data-features></section>
 
     <section class="plans">
-      <h2>Un plan para cada escala</h2>
-      <div class="sub">Las mismas funciones en los tres — cambia cuántas obras, cuánto almacenamiento y cuántos miembros.</div>
-      <div class="plan-grid">
-        <div class="plan-card">
-          <div class="name">Individual</div>
-          <div class="limits">1 obra activa<br>2 GB de almacenamiento<br>Hasta 5 miembros</div>
-        </div>
-        <div class="plan-card reco">
-          <div class="name">Profesional</div>
-          <div class="limits">3 obras activas<br>10 GB de almacenamiento<br>Hasta 10 miembros</div>
-        </div>
-        <div class="plan-card">
-          <div class="name">Estudio</div>
-          <div class="limits">Obras ilimitadas<br>50 GB de almacenamiento<br>Miembros ilimitados</div>
-        </div>
-      </div>
+      <h2 data-i18n="plansTitle">Un plan para cada escala</h2>
+      <div class="sub" data-i18n="plansSub">Las mismas funciones en los tres — cambia cuántas obras, cuánto almacenamiento y cuántos miembros.</div>
+      <div class="plan-grid" data-plans></div>
     </section>
 
     <footer>
       <div class="foot-cta">
-        <a class="cta-primary" href="mailto:info@diegopetrate.com?subject=Quiero%20probar%20Cuaderno%20de%20Obra">Crear mi primera obra gratis →</a>
+        <a class="cta-primary" data-mailcta href="#" data-i18n="heroCta">Crear mi primera obra gratis →</a>
       </div>
       <a class="mail" href="mailto:info@diegopetrate.com">info@diegopetrate.com</a>
       <div class="copy">© 2026 Cuaderno de Obra</div>
     </footer>
   </div>
+
+<script>
+(function () {
+  var DICT = {
+    es: {
+      brand: 'Cuaderno de Obra',
+      title: 'Cuaderno de Obra — Tu obra. Tu propia app.',
+      description: 'Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.',
+      navCta: 'Empezar gratis',
+      eyebrow: 'Gestión de obra, simple',
+      h1: 'Tu obra.<br><span>Tu propia app.</span>',
+      subhead: 'Gestioná tu proyecto, compartí información con tu cliente y coordiná a tu equipo. Todo en un solo lugar.',
+      heroCta: 'Crear mi primera obra gratis →',
+      ctaNote: 'Sin tarjeta. 30 días gratis.',
+      flowTitle: 'De la primera obra al cierre',
+      flow: ['Crear obra', 'Dashboard', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Avance', 'Cierre'],
+      features: [
+        ['📷', 'Fotos y videos de obra', 'Registrá el avance con fotos y videos geoetiquetados, organizados por fecha y accesibles para todo el equipo.'],
+        ['🎥', 'Cámaras y drones', 'Conectá cámaras IP o drones con stream propio y mirá tu obra en vivo desde la app, capturando referencias cuando las necesitás.'],
+        ['💰', 'Contabilidad', 'Cargá gastos e ingresos por categoría, en varias monedas, y llevá el balance de la obra sin depender de una planilla aparte.'],
+        ['📁', 'Documentos', 'Planos, contratos, pólizas y permisos, ordenados por categoría y disponibles para consultar desde cualquier lugar.'],
+        ['👥', 'Equipo y clientes', 'Invitá a subcontratistas, arquitectos y al cliente con un simple código — cada uno ve exactamente lo que necesita.'],
+        ['🗓️', 'Cronograma y tareas', 'Planificá etapas, asigná tareas y llevá el pulso de la obra día a día, desde el celular.'],
+      ],
+      plansTitle: 'Un plan para cada escala',
+      plansSub: 'Las mismas funciones en los tres — cambia cuántas obras, cuánto almacenamiento y cuántos miembros.',
+      plans: [
+        ['Individual', ['1 obra activa', '2 GB de almacenamiento', 'Hasta 5 miembros'], false],
+        ['Profesional', ['3 obras activas', '10 GB de almacenamiento', 'Hasta 10 miembros'], true],
+        ['Estudio', ['Obras ilimitadas', '50 GB de almacenamiento', 'Miembros ilimitados'], false],
+      ],
+      mailSubject: 'Quiero probar Cuaderno de Obra',
+    },
+    en: {
+      brand: 'Cuaderno de Obra',
+      title: 'Cuaderno de Obra — Your project. Your own app.',
+      description: 'Manage your project, share information with your client, and coordinate your team. All in one place.',
+      navCta: 'Start for free',
+      eyebrow: 'Project management, simple',
+      h1: 'Your project.<br><span>Your own app.</span>',
+      subhead: 'Manage your project, share information with your client, and coordinate your team. All in one place.',
+      heroCta: 'Create my first project free →',
+      ctaNote: 'No card required. 30 days free.',
+      flowTitle: 'From the first project to closeout',
+      flow: ['Create project', 'Dashboard', 'Schedule', 'Photos', 'Documents', 'Client', 'Progress', 'Closeout'],
+      features: [
+        ['📷', 'Photos and videos', 'Log progress with geotagged photos and videos, organized by date and available to your whole team.'],
+        ['🎥', 'Cameras and drones', 'Connect IP cameras or drones with their own stream and watch your site live from the app, capturing stills whenever you need them.'],
+        ['💰', 'Accounting', 'Log expenses and income by category, in multiple currencies, and track the project balance without a separate spreadsheet.'],
+        ['📁', 'Documents', 'Plans, contracts, insurance policies and permits, sorted by category and available from anywhere.'],
+        ['👥', 'Team and clients', 'Invite subcontractors, architects, and the client with a simple code — everyone sees exactly what they need.'],
+        ['🗓️', 'Schedule and tasks', 'Plan phases, assign tasks, and keep a daily pulse on the project, from your phone.'],
+      ],
+      plansTitle: 'A plan for every scale',
+      plansSub: 'Same features on all three — what changes is how many projects, how much storage, and how many members.',
+      plans: [
+        ['Individual', ['1 active project', '2 GB of storage', 'Up to 5 members'], false],
+        ['Professional', ['3 active projects', '10 GB of storage', 'Up to 10 members'], true],
+        ['Studio', ['Unlimited projects', '50 GB of storage', 'Unlimited members'], false],
+      ],
+      mailSubject: 'I want to try Cuaderno de Obra',
+    },
+    pt: {
+      brand: 'Cuaderno de Obra',
+      title: 'Cuaderno de Obra — Sua obra. Seu próprio app.',
+      description: 'Gerencie sua obra, compartilhe informações com seu cliente e coordene sua equipe. Tudo em um só lugar.',
+      navCta: 'Começar grátis',
+      eyebrow: 'Gestão de obra, simples',
+      h1: 'Sua obra.<br><span>Seu próprio app.</span>',
+      subhead: 'Gerencie sua obra, compartilhe informações com seu cliente e coordene sua equipe. Tudo em um só lugar.',
+      heroCta: 'Criar minha primeira obra grátis →',
+      ctaNote: 'Sem cartão. 30 dias grátis.',
+      flowTitle: 'Da primeira obra ao encerramento',
+      flow: ['Criar obra', 'Painel', 'Cronograma', 'Fotos', 'Documentos', 'Cliente', 'Andamento', 'Encerramento'],
+      features: [
+        ['📷', 'Fotos e vídeos da obra', 'Registre o andamento com fotos e vídeos geolocalizados, organizados por data e acessíveis para toda a equipe.'],
+        ['🎥', 'Câmeras e drones', 'Conecte câmeras IP ou drones com stream próprio e acompanhe sua obra ao vivo pelo app, capturando imagens quando precisar.'],
+        ['💰', 'Contabilidade', 'Registre despesas e receitas por categoria, em várias moedas, e acompanhe o saldo da obra sem depender de uma planilha à parte.'],
+        ['📁', 'Documentos', 'Plantas, contratos, apólices e licenças, organizados por categoria e disponíveis de qualquer lugar.'],
+        ['👥', 'Equipe e clientes', 'Convide subempreiteiros, arquitetos e o cliente com um código simples — cada um vê exatamente o que precisa.'],
+        ['🗓️', 'Cronograma e tarefas', 'Planeje etapas, atribua tarefas e acompanhe o ritmo da obra dia a dia, pelo celular.'],
+      ],
+      plansTitle: 'Um plano para cada escala',
+      plansSub: 'As mesmas funções nos três — o que muda é quantas obras, quanto armazenamento e quantos membros.',
+      plans: [
+        ['Individual', ['1 obra ativa', '2 GB de armazenamento', 'Até 5 membros'], false],
+        ['Profissional', ['3 obras ativas', '10 GB de armazenamento', 'Até 10 membros'], true],
+        ['Estúdio', ['Obras ilimitadas', '50 GB de armazenamento', 'Membros ilimitados'], false],
+      ],
+      mailSubject: 'Quero experimentar o Cuaderno de Obra',
+    },
+  };
+
+  var STORAGE_KEY = 'cuadernodeobra_landing_lang';
+
+  function detectLang() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && DICT[saved]) return saved;
+    } catch (e) {}
+    var nav = (navigator.language || 'es').toLowerCase();
+    if (nav.indexOf('pt') === 0) return 'pt';
+    if (nav.indexOf('en') === 0) return 'en';
+    return 'es';
+  }
+
+  function renderFlow(container, steps) {
+    container.innerHTML = '';
+    steps.forEach(function (step, i) {
+      if (i > 0) {
+        var arrow = document.createElement('span');
+        arrow.className = 'flow-arrow';
+        arrow.textContent = '→';
+        container.appendChild(arrow);
+      }
+      var chip = document.createElement('span');
+      chip.className = 'flow-step';
+      chip.textContent = step;
+      container.appendChild(chip);
+    });
+  }
+
+  function renderFeatures(container, features) {
+    container.innerHTML = '';
+    features.forEach(function (f) {
+      var card = document.createElement('div');
+      card.className = 'feature-card';
+      var icon = document.createElement('div');
+      icon.className = 'icon';
+      icon.textContent = f[0];
+      var h3 = document.createElement('h3');
+      h3.textContent = f[1];
+      var p = document.createElement('p');
+      p.textContent = f[2];
+      card.appendChild(icon);
+      card.appendChild(h3);
+      card.appendChild(p);
+      container.appendChild(card);
+    });
+  }
+
+  function renderPlans(container, plans) {
+    container.innerHTML = '';
+    plans.forEach(function (p) {
+      var card = document.createElement('div');
+      card.className = 'plan-card' + (p[2] ? ' reco' : '');
+      var name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = p[0];
+      var limits = document.createElement('div');
+      limits.className = 'limits';
+      limits.innerHTML = p[1].join('<br>');
+      card.appendChild(name);
+      card.appendChild(limits);
+      container.appendChild(card);
+    });
+  }
+
+  function apply(lang) {
+    var d = DICT[lang] || DICT.es;
+    document.documentElement.lang = lang;
+    document.title = d.title;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', d.description);
+
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (d[key] != null) el.textContent = d[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (d[key] != null) el.innerHTML = d[key];
+    });
+
+    var mailHref = 'mailto:info@diegopetrate.com?subject=' + encodeURIComponent(d.mailSubject);
+    document.querySelectorAll('[data-mailcta]').forEach(function (a) { a.setAttribute('href', mailHref); });
+
+    renderFlow(document.querySelector('[data-flow]'), d.flow);
+    renderFeatures(document.querySelector('[data-features]'), d.features);
+    renderPlans(document.querySelector('[data-plans]'), d.plans);
+
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+    btn.addEventListener('click', function () { apply(btn.getAttribute('data-lang')); });
+  });
+
+  apply(detectLang());
+})();
+</script>
 </body>
 </html>
