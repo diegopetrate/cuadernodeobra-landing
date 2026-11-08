@@ -359,6 +359,12 @@ document.addEventListener('DOMContentLoaded', async function() {
       window.Babel.transformScriptTags();
     }
 
+    // "/" y "/index.html" son la misma página: se normaliza la URL a "/" antes
+    // de cargar el medidor para que Cloudflare no la cuente como dos páginas.
+    if (location.pathname.endsWith('/index.html')) {
+      history.replaceState(null, '', location.pathname.slice(0, -'index.html'.length) + location.search + location.hash);
+    }
+
     // Cloudflare Web Analytics: load after the bundled page replaces the document.
     // Adding the beacon to the original <head> would be lost during replaceWith.
     const analyticsScript = document.createElement('script');

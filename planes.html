@@ -358,6 +358,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
     }
+
+    // Cloudflare Web Analytics: load after the bundled page replaces the document.
+    // Adding the beacon to the original <head> would be lost during replaceWith.
+    const analyticsScript = document.createElement('script');
+    analyticsScript.type = 'module';
+    analyticsScript.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    analyticsScript.setAttribute('data-cf-beacon', '{"token":"4862550884704ca580bdacd7e3acdb97"}');
+    document.head.appendChild(analyticsScript);
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
     console.error('Bundle unpack error:', err);
