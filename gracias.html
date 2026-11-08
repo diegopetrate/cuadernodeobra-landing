@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>¡Gracias! — Cuaderno de Obra</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+           background: #faf9f5; color: #1d2433; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .card { max-width: 440px; width: 100%; background: #fff; border-radius: 18px; padding: 32px 26px; text-align: center;
+            box-shadow: 0 8px 30px rgba(15, 33, 66, 0.10); }
+    .icono { width: 56px; height: 56px; border-radius: 50%; background: #E0F2FE; color: #0369A1; font-size: 28px;
+             display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    h1 { font-size: 1.5rem; margin: 0 0 10px; color: #0f2142; }
+    p { margin: 0 0 14px; line-height: 1.55; color: #4b5563; }
+    a.boton { display: inline-block; margin-top: 8px; background: #0EA5E9; color: #fff; text-decoration: none; padding: 12px 20px;
+              border-radius: 10px; font-weight: 600; }
+    .error { display: none; }
+    .con-error .ok { display: none; } .con-error .error { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="icono">✓</div>
+    <div class="ok">
+      <h1>¡Gracias por tu respuesta!</h1>
+      <p>Nos ayuda mucho a mejorar Cuaderno de Obra. Si quieres contarnos más, responde el email que te enviamos.</p>
+    </div>
+    <div class="error">
+      <h1>¡Gracias!</h1>
+      <p>No pudimos registrar tu respuesta desde este enlace. Si quieres, responde el email que te enviamos y lo leemos personalmente.</p>
+    </div>
+    <a class="boton" href="https://projectlogbook.netlify.app">Abrir Cuaderno de Obra</a>
+  </div>
+  <script>
+    if (new URLSearchParams(location.search).get('e')) document.getElementById('card').classList.add('con-error');
+  </script>
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"4862550884704ca580bdacd7e3acdb97"}'></script>
+</body>
+</html>
